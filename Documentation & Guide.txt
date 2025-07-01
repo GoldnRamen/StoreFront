@@ -1,0 +1,168 @@
+Since you've disabled the App Router, your Next.js project will use the Pages Router instead.
+I'll walk you through creating different pages and components step by step.
+
+1. Understanding the Pages Router
+In the Pages Router, Next.js automatically treats every .js or .tsx file inside the pages/ directory as a route.
+
+Components go inside a components/ directory (or anywhere you prefer) and can be used across multiple pages.
+
+2. Creating Pages in Next.js (Pages Router)
+Navigate to the pages/ directory in your project and create the following files:
+
+📌 Home Page (pages/index.js)
+This will be the default page when you visit /.
+
+jsx
+Copy
+Edit
+// pages/index.js
+import Head from "next/head";
+import Navbar from "../components/Navbar";
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Home | My Next.js App</title>
+      </Head>
+      <Navbar />
+      <main>
+        <h1>Welcome to My Next.js App</h1>
+      </main>
+    </>
+  );
+}
+📌 About Page (pages/about.js)
+This will be accessible at /about.
+
+jsx
+Copy
+Edit
+// pages/about.js
+import Navbar from "../components/Navbar";
+
+export default function About() {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <h1>About Us</h1>
+        <p>This is the about page.</p>
+      </main>
+    </>
+  );
+}
+📌 Contact Page (pages/contact.js)
+This will be accessible at /contact.
+
+jsx
+Copy
+Edit
+// pages/contact.js
+import Navbar from "../components/Navbar";
+
+export default function Contact() {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <h1>Contact Us</h1>
+        <p>Email: contact@myapp.com</p>
+      </main>
+    </>
+  );
+}
+3. Creating Reusable Components
+Since your navigation should be consistent across pages, let’s create a Navbar component.
+
+📌 Navbar Component (components/Navbar.js)
+Create a components/ directory in your project (if it doesn’t exist) and add this file:
+
+jsx
+Copy
+Edit
+// components/Navbar.js
+import Link from "next/link";
+
+export default function Navbar() {
+  return (
+    <nav>
+      <ul>
+        <li><Link href="/">Home</Link></li>
+        <li><Link href="/about">About</Link></li>
+        <li><Link href="/contact">Contact</Link></li>
+      </ul>
+      <style jsx>{`
+        nav {
+          background: #333;
+          padding: 10px;
+        }
+        ul {
+          display: flex;
+          gap: 15px;
+          list-style: none;
+        }
+        li a {
+          color: white;
+          text-decoration: none;
+        }
+      `}</style>
+    </nav>
+  );
+}
+4. Dynamic Routing (Pages with Parameters)
+If you need dynamic pages (e.g., /product/1, /product/2), create a file inside pages/ with square brackets:
+
+📌 Dynamic Product Page (pages/product/[id].js)
+jsx
+Copy
+Edit
+// pages/product/[id].js
+import { useRouter } from "next/router";
+
+export default function Product() {
+  const router = useRouter();
+  const { id } = router.query;
+
+  return (
+    <div>
+      <h1>Product ID: {id}</h1>
+    </div>
+  );
+}
+Visiting /product/123 will display "Product ID: 123".
+
+5. 404 Page (Custom Error Page)
+To create a custom 404 page, add pages/404.js:
+
+jsx
+Copy
+Edit
+// pages/404.js
+export default function NotFound() {
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h1>404 - Page Not Found</h1>
+      <p>Oops! The page you're looking for does not exist.</p>
+    </div>
+  );
+}
+6. Running the App
+Make sure your development server is running:
+
+sh
+Copy
+Edit
+npm run dev
+Then visit:
+✅ http://localhost:3000/ → Home Page
+✅ http://localhost:3000/about → About Page
+✅ http://localhost:3000/contact → Contact Page
+✅ http://localhost:3000/product/1 → Dynamic Product Page
+✅ http://localhost:3000/anything-else → Custom 404 Page
+
+This setup gives you a structured Next.js (Pages Router) app with:
+✅ Multiple pages
+✅ Reusable components
+✅ Dynamic routes
+✅ A custom 404 page
