@@ -39,7 +39,7 @@ export default function Meat(){
                 <div className="ml-[5%] mt-32 lg:p-4 space-y-10 flex flex-col relative">
                     <div><p className="text-3xl text-white">Meat</p></div>
                     <ul className="grid lg:grid-cols-3 grid-rows-3 space-y-10 space-x-5 text-center h-full">
-                        <li className="relative hover:text-white h-[300px] text-black text-sm shadow shadow-white rounded-xl z-10" onMouseEnter={() => setIshover2(true)} onMouseLeave={() => setIshover2(false)}>
+                        <li className="relative hover:text-white h-[300px] text-black text-sm shadow shadow-white rounded-xl z-20" onMouseEnter={() => setIshover2(true)} onMouseLeave={() => setIshover2(false)}>
                             <div className="w-full h-full perspective" >
                                 <div className={`relative w-full h-full duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
                                     <div className="absolute w-full h-full backface-hidden cursor-pointer" onClick={() => setFlipped(!flipped)}>
@@ -245,7 +245,7 @@ export default function Meat(){
                             </div>
                         </li>
 
-                        <li className="relative hover:text-white h-[300px] text-black shadow text-sm shadow-white rounded-xl z-10" onMouseEnter={()=>setIshover3(true)} onMouseLeave={()=>setIshover3(false)}>
+                        <li className="relative hover:text-white h-[300px] text-black shadow text-sm shadow-white rounded-xl z-18" onMouseEnter={()=>setIshover3(true)} onMouseLeave={()=>setIshover3(false)}>
                                 <div className="w-full h-full perspective">
                                 <div className={`relative w-full h-full duration-700 transform-style preserve-3d ${flipped2 ? 'rotate-y-180' : ''}`}>
                                     <div className="absolute w-full h-full backface-hidden cursor-pointer" onClick={() => setFlipped2(!flipped2)}>
@@ -619,7 +619,7 @@ export default function Meat(){
                             </div>
                         </li>
 
-                        <li className="relative hover:text-white h-[300px] text-black shadow text-sm shadow-white rounded-xl z-10" onMouseEnter={()=>setIshover4(true)} onMouseLeave={()=>setIshover4(false)}>
+                        <li className="relative hover:text-white h-[300px] text-black shadow text-sm shadow-white rounded-xl z-16" onMouseEnter={()=>setIshover4(true)} onMouseLeave={()=>setIshover4(false)}>
                             <div className="w-full h-full perspective">
                                 <div className={`relative w-full h-full duration-700 transform-style preserve-3d ${flipped3 ? 'rotate-y-180' : ''}`}>
                                     <div className="absolute h-full w-full backface-hidden cursor-pointer" onClick={() => setFlipped3(!flipped3)}>
@@ -903,7 +903,7 @@ export default function Meat(){
                             </div>
                         </li>
 
-                        <li className="relative hover:text-white h-[300px] text-black shadow text-sm shadow-white rounded-xl" onMouseEnter={()=>setIshover5(true)} onMouseLeave={()=>setIshover5(false)}>
+                        <li className="relative hover:text-white h-[300px] text-black shadow text-sm shadow-white rounded-xl z-14" onMouseEnter={()=>setIshover5(true)} onMouseLeave={()=>setIshover5(false)}>
                             <div className="w-full h-full perspective">
                                 <div className={`relative w-full h-full duration-700 transform-style preserve-3d ${flipped4 ? "rotate-y-180" : ""}`}>
                                     <div className="absolute w-full h-full backface-hidden cursor-pointer" onClick={() => setFlipped4(!flipped4)}>
@@ -1015,7 +1015,8 @@ export default function Meat(){
                                 </div>
                             </div>
                         </li>
-                        <li className="relative hover:text-white h-[300px] text-black shadow text-sm shadow-white rounded-xl" onMouseEnter={()=>setIshover6(true)} onMouseLeave={()=>setIshover6(false)}>
+
+                        <li className="relative hover:text-white h-[300px] text-black shadow text-sm shadow-white rounded-xl z-12" onMouseEnter={()=>setIshover6(true)} onMouseLeave={()=>setIshover6(false)}>
                             <div className="w-full h-full prespective">
                                 <div className={`relative w-full h-full duration-700 transform-style preserve-3d ${flipped5 ? 'rotate-y-180' : ''}`}>
                                     <div className="absolute w-full h-full backface-hidden cursor-pointer" onClick={() => setFlipped5(!flipped)}>

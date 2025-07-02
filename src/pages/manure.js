@@ -3,6 +3,8 @@ import Sidebar from "@/components/Sidebar"
 import Subnavbar from "@/components/SubNavbar"
 import { useRouter } from "next/router"
 import Footer from "@/components/Footer"
+import Navbar from "@/components/Navbar"
+import SmallSidebar from "@/components/SmallSideBar"
 // import Link from "next/link"
 export default function Manure(){
     const [ishover, setIshover] = useState(false)
@@ -13,9 +15,10 @@ export default function Manure(){
     return(
             <>
                 <div className="relative flex flex-col">
-                    <Subnavbar />
+                    <Navbar />
                     <Sidebar />
-                    <div className="ml-[5%] mt-20 p-4 space-y-10 flex flex-col relative">
+                    <SmallSidebar />
+                    <div className="ml-[5%] mt-32 p-4 space-y-10 flex flex-col relative">
                         <div><p className="text-3xl text-white">Manure</p></div>
                         <ul className="grid grid-cols-3 space-y-10 space-x-5 text-center h-full">
                             <li className="relative hover:text-white h-[300px] text-black shadow text-sm shadow-white rounded-xl" onMouseEnter={()=>setIshover(true)} onMouseLeave={()=>setIshover(false)}><img className="w-full h-full object-cover rounded-xl" src="https://i0.wp.com/media.premiumtimesng.com/wp-content/files/2022/12/Broiler-Chickens.jpg?fit=850%2C550&ssl=1"/>{ishover ? <h3 className="font-extrabold absolute top-5 left-5 border opacity-65 bg-black rounded-lg p-2">Broilers</h3> : null}</li>

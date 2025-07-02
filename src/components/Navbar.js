@@ -10,7 +10,7 @@ export default function Navbar() {
     const[isSmallView, setSmallView] = useState(false)
 
     return(
-        <nav className="fixed w-full left-0 right-0 z-20">
+        <nav className="fixed w-full left-0 right-0 z-30">
             <div className="flex justify-between p-4 bg-yellow-500 text-amber-900 text-lg h-fit">
                 <div className="flex space-x-3 items-center hover:animate-pulse font-sans text-sm">
                     <p>
