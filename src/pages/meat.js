@@ -38,7 +38,7 @@ export default function Meat(){
                 <SmallSidebar />
                 <div className="ml-[5%] mt-32 lg:p-4 space-y-10 flex flex-col relative">
                     <div><p className="text-3xl text-white">Meat</p></div>
-                    <ul className="grid lg:grid-cols-3 grid-rows-3 space-y-10 space-x-5 text-center h-full">
+                    <ul className="grid lg:grid-cols-3 space-y-10 space-x-5 text-center h-full">
                         <li className="relative hover:text-white h-[300px] text-black text-sm shadow shadow-white rounded-xl z-20" onMouseEnter={() => setIshover2(true)} onMouseLeave={() => setIshover2(false)}>
                             <div className="w-full h-full perspective" >
                                 <div className={`relative w-full h-full duration-700 transform-style preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
