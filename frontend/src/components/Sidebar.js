@@ -15,7 +15,7 @@ export default function Sidebar(){
     return(
         <>
         {showbar && (
-            <div className={`transition-all duration-500 fixed left-0 top-[52px] w-[3%] h-full z-50 py-1 px-3 lg:block hidden
+            <div className={`transition-all duration-500 fixed left-0 top-[59px] w-[3%] h-full z-50 py-1 px-3 lg:block hidden
                 ${expandbar ? "w-fit bg-white opacity-100" : "w-[5%] bg-yellow-700 opacity-60"}`} onMouseEnter={()=>setExpandbar(true)} onMouseLeave={()=>setExpandbar(false)}>
                 <div className={`rounded-4xl bg-amber-950 items-center mx-auto justify-center flex w- p-4 space-x-5`}>
                     <GiHamburgerMenu size={20} className="text-center" />

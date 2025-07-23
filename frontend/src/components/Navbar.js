@@ -12,12 +12,14 @@ export default function Navbar() {
     return(
         <nav className="fixed w-full left-0 right-0 z-30">
             <div className="flex justify-between p-4 bg-yellow-500 text-amber-900 text-lg h-fit">
-                <div className="flex space-x-3 items-center hover:animate-pulse font-sans text-sm">
-                    <p>
-                        Mrs Tweedy's
-                    </p>
-                    <img src={"/chicken.png"} width={20} height={2}/>
-                </div>
+                <Link href={"/"}>
+                    <div className="flex space-x-3 items-center hover:animate-pulse font-sans text-sm bg-amber-900 p-1 rounded-lg">
+                        <p className="text-white">
+                            Mrs Tweedy's
+                        </p>
+                        <img src={"/chicken.png"} width={20} height={2}/>
+                    </div>
+                </Link>
                 <ul className="lg:flex justify-between text-sm space-x-3 hidden">
                     <li className="cursor-pointer hover:px-4 hover:border-r hover:border-l hover:text-white"><Link href="/">Home</Link></li>
                     <li className={(currentRoute == "/signup" || currentRoute == "/login") ? "hidden" : "cursor-pointer hover:px-4 hover:border-r hover:border-l hover:text-white"}><a href="#about">About</a></li>
