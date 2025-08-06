@@ -3,6 +3,7 @@ import Sidebar from "@/components/Sidebar";
 import { FiLogIn } from "react-icons/fi";
 
 export default function Login(){
+    
     return(
         <>
         <div className="relative w-full h-[100vh] flex flex-col">

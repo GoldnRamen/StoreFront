@@ -3,11 +3,13 @@ const mongoose = require("mongoose")
 const userSchema = new mongoose.Schema({
     firstName:{
         type: String,
-        trim: true
+        trim: true,
+        required: true
     },
     lastName:{
         type: String,
-        trim: true
+        trim: true,
+        required: true
     },
     email:{
         type: String,
@@ -19,11 +21,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Phone number is required"],
         match: [/^\d{8,15}$/, "Please enter a valid phone number"],
+        required: true
+    },
+    city:{
+        type: String,
+        required: true,
     },
     gender:{
         type: String,
-        enum: ["male", "female"],
-        // required: true
+        enum: ["male", "female", "unspecified"],
+    },
+    age:{
+        type: Date,
+        required: false
     },
     avatar:{
         type: String,
