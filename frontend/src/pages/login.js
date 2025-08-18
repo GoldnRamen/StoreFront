@@ -1,8 +1,42 @@
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import { useState } from "react";
 import { FiLogIn } from "react-icons/fi";
 
 export default function Login(){
+    const [submitted, setSubmitted] = useState(false)
+    const [errors, setErrors] = useState({})
+    const [inputValues, setInputValues] = useState({
+        email: "",
+        password: ""
+    })
+
+    const validateEmail = ()=>{
+        return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(inputValues.email)
+    }
+    const validatePassword = ()=>{
+        return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/.test(inputValues.password)
+    }
+    
+    const formValidate =()=>{
+        const newErrors = {}
+        if(!validateEmail){
+            newErrors.email = "Email address not recognized"
+        }
+        if(!validatePassword){
+            newErrors.password = "Password must have 6-15 characters, must contain a number and one uppercase character"
+        }
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
+    const handleChange = (e)=>{
+        setInputValues({
+            ...inputValues,
+            [e.target.name] : e.target.value
+        })
+    }
+
     
     return(
         <>
@@ -14,9 +48,11 @@ export default function Login(){
                     <p className="text-center lg:text-3xl text-xl text-yellow-500 font-extrabold mt-5 underline">Login</p>
                     <div>
                         <form className="text-black p-3 lg:mt-[15vh] mt-[5vh] space-y-5 w-[80%] mx-auto">
-                            <input placeholder="Username or Email" className="px-2 py-1 border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full sm:text-sm"/>
+                            <input placeholder="Username or Email"
+                            onChange={handleChange} className="px-2 py-1 border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full sm:text-sm"/>
                             <div className="flex gap-1 items-center">
-                                <input placeholder="Password" className="px-2 py-1 border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full sm:text-sm"/>
+                                <input placeholder="Password"
+                                onChange={handleChange} className="px-2 py-1 border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full sm:text-sm"/>
                                 <button className="lg:p-2 p-1 bg-amber-950 text-white hover:shadow-lg hover:shadow-black rounded-lg sm:text-sm"><FiLogIn /></button>    
                             </div>   
                         </form>
