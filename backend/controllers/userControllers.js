@@ -22,5 +22,24 @@ const customerReg = async(req, res)=>{
         console.log(req.body)
     }
 }
+const customerLogin = async(req, res)=>{
+    try {
+        const {email, password} = req.body
+        const findUser = await userModel.findOne({email: email})
+        if(!findUser) return res.status(404).send({success: false, msg: "Invalid Email Entered"})
+        const findPassword = await bcryptjs.compare(password, findUser.password)
+        if(!findPassword) return res.status(401).send({success: false, msg: "Invalid Password Entered"})
+            const userCredentials = {
+                id: findUser._id,
+                email: findUser.email,
+                role: findUser.role
+            }
+            findUser.lastLogin = new Date()
+            await findUser.save()
+        res.status(200).json({ success: true, msg: "Login Successful!", data: userCredentials})
+    } catch (error) {
+        res.status(500).json({ success: false, msg: "Login Failed!", error: error.message })
+    }
+}
 
-module.exports = {customerReg}
+module.exports = {customerReg, customerLogin}
