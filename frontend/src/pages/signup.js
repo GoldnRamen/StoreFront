@@ -23,6 +23,17 @@ export default function Signup(){
         setInputValues((prevState) => ({
             ...prevState, [name]: value
         }))
+        setErrorMsg({
+            ...inputValues,
+            firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        city: "",
+        gender: "",
+        age: "",
+        password: ""
+        })
     }
     const handleCreate = async(e)=>{
         e.preventDefault()
@@ -104,7 +115,7 @@ export default function Signup(){
                                 }
                                 <input placeholder="First Name"
                                 onChange={handleChange}
-                                name="firstName" className="px-2 py-1 border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full"
+                                name="firstName" className="px-2 py-1 capitalize border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full"
                                 value={inputValues.firstName}/>
                             </div>
                             <div>
@@ -113,7 +124,7 @@ export default function Signup(){
                                 <input placeholder="Last Name" 
                                 onChange={handleChange}
                                 name="lastName"
-                                className="px-2 py-1 border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full"
+                                className="px-2 py-1 capitalize border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full"
                                 value={inputValues.lastName}/>
                             </div>
                             <div>
@@ -135,18 +146,12 @@ export default function Signup(){
                             </div>
                             <div>
                                 {errorMsg.city ? <p className="text-xs text-red-700">{errorMsg.city}</p> : null }
-                                <input placeholder="Address" 
+                                <input placeholder="City" 
                                 onChange={handleChange}
                                 name={"city"}
-                                className="px-2 py-1 border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full"
+                                className="px-2 py-1 capitalize border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full"
                                 value={inputValues.city}/>
                             </div>
-                            <input 
-                            type="file" 
-                            name="avatar"
-                            onChange={(e) => setInputValues({ ...inputValues, avatar: e.target.files[0] })} 
-                            className="px-2 py-1 border-yellow-700 bg-yellow-500 border rounded flex w-full"
-                            />
                             <select className="px-2 py-1 border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full"
                             onChange={handleChange}
                             name="gender"
@@ -164,17 +169,17 @@ export default function Signup(){
                                 placeholder="DOB" className="bg-yellow-200 flex w-fit"
                                 value={inputValues.age}/>
                             </div>
-                            <div className="flex gap-1 items-center">
-                               <div>
-                                    {errorMsg.password ? <p className="text-xs text-red-700">{errorMsg.password}</p> : <p className="text-xs">Must have upper and lower case letters, numbers and must be 6-15 characters</p> }
+                            <div className="flex flex-col gap-1 items-center">
+                                {errorMsg.password ? <p className="text-xs text-red-700">{errorMsg.password}</p> : null }
+                               <div className="flex gap-3 w-full">                                    
                                     <input placeholder="Password" 
                                     type="password"
                                     onChange={handleChange}
                                     name="password"
                                     className="px-2 py-1 border-yellow-700 bg-yellow-200 border-b-2 rounded flex w-full"
                                     value={inputValues.password}/>
-                               </div>
-                                <button type="submit" className="lg:p-2 p-1 bg-amber-950 text-white hover:shadow-lg hover:shadow-black rounded-lg sm:text-sm flex items-center">Submit<FiLogIn /></button>
+                                    <button type="submit" className="lg:p-2 p-1 bg-amber-950 text-white hover:shadow-lg hover:shadow-black rounded-lg sm:text-sm flex items-center">Submit<FiLogIn /></button>
+                               </div>                                
                             </div>
                         </form>
                     </div>

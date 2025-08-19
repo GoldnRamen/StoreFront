@@ -35,11 +35,6 @@ const userSchema = new mongoose.Schema({
         type: Date,
         required: false
     },
-    avatar:{
-        type: String,
-        default: null,
-        match: [/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/, "Please enter a valid URL"]
-    },
     password:{
         type: String,
         required: [true, "Password is required"],

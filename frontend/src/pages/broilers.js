@@ -66,7 +66,7 @@ export default function Broilers(){
                             </form>
                         </li>
                         <li className="relative hover:text-white text-white shadow text-sm shadow-white col-span-3" onMouseEnter={()=>setIshover2(true)} onMouseLeave={()=>setIshover2(false)}>
-                            <p className="flex flex-col space-y-[5vh] text-start p-3">
+                            <div className="flex flex-col space-y-[5vh] text-start p-3">
                                 <p className="text-xl text-center">Our Premium Broilers: Raised with Care, Delivered with Pride</p>
                                 <p>
                                     At Mrs. Tweedy’s Poultry Haven, broilers aren’t just birds—they’re a promise of quality, health, and responsible farming. Broilers are chickens specifically bred and raised for meat production, prized for their rapid growth, tender flesh, and juicy flavor. These birds are typically ready for market within 6–8 weeks, making them one of the most efficient sources of protein in poultry farming.
@@ -109,7 +109,7 @@ export default function Broilers(){
                                         Customers choose Mrs. Tweedy’s broilers for their tenderness, juiciness, and superior taste. Whether you're preparing a festive roast, a weekday stew, or spicy wings for the grill, our broilers deliver rich, consistent flavour every time.</p>
                                     </p>
                                     <p className="col-span-1"><img src="https://ideogram.ai/assets/progressive-image/balanced/response/36iT6sqrTwaWmDlh-GnaGg" className="w-full h-full object-cover" /></p>
-                                </p>
+                            </div>
                             {/* {ishover2 ? <h3 className="font-extrabold absolute top-5 left-5 border opacity-65 bg-black rounded-lg p-2">Layers</h3> : null} */}
                         </li>
                     </ul>     
