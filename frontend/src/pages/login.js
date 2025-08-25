@@ -1,10 +1,13 @@
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import { HostContext } from "@/context/HostContext";
 import axios from "axios";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
 import { FiLogIn } from "react-icons/fi";
 
 export default function Login(){
+    const routing = useRouter()
     const [submitted, setSubmitted] = useState(false)
     const [errors, setErrors] = useState({})
     const [invalid, setInvalid] = useState("")
@@ -13,7 +16,7 @@ export default function Login(){
         email: "",
         password: ""
     })
-
+    
     const handleChange = (e)=>{
         setInputValues({
             ...inputValues,
@@ -52,6 +55,7 @@ export default function Login(){
             setSubmitted(true)
             if (resp.status === 200){
                 alert("Login Successful")
+                routing.push("/")
                 console.log("Login Successful", resp.data)
                 setInputValues({
                     ...inputValues,
@@ -84,7 +88,7 @@ export default function Login(){
         <>
         <div className="relative w-full h-[100vh] flex flex-col">
             <Navbar />
-            <img src="https://ideogram.ai/assets/progressive-image/balanced/response/haIL6hEpTPyI3dK5eoD-2A" className="absolute w-full object-cover h-[100vh] object-center opacity-20"></img>
+            <img src="https://ideogram.ai/assets/progressive-image/balanced/response/haIL6hEpTPyI3dK5eoD-2A" className="absolute w-full object-cover h-[100vh] object-center opacity-40"></img>
             <div className="z-10 mx-auto flex flex-col rounded-lg shadow-lg shadow-black mt-32 bg-amber-500 lg:w-[30%] w-[80%] lg:h-[70%] h-[60%] items-center lg:text-lg">
                 <div className="w-[95%] bg-yellow-100 h-[95%] mx-auto my-auto shadow-gray-950 shadow-lg p-2">
                     <p className="text-center lg:text-3xl text-xl text-yellow-500 font-extrabold mt-5 underline">Login</p>

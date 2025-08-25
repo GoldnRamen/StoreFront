@@ -251,11 +251,9 @@ export default function Cockerels(){
                             </form>
                         </li>
                         <li className="relative hover:text-white text-white shadow text-sm shadow-white col-span-3" onMouseEnter={()=>setIshover2(true)} onMouseLeave={()=>setIshover2(false)}>
-                            <p className="flex flex-col space-y-[5vh] text-start p-3">
+                            <div className="flex flex-col space-y-[5vh] text-start p-3">
                                 <p className="text-2xl text-center">🐓 Cockerels and Roosters: Vital Partners in Poultry Production</p>
-                                <p>
-                                    Cockerels and roosters play a vital role in poultry farming, offering not just the power to fertilize eggs for new generations, but also serving in meat production, flock protection, and even feather harvesting. Understanding their different stages of development and best uses can help any poultry business grow stronger and more sustainable.
-                                </p>
+                                <p>Cockerels and roosters play a vital role in poultry farming, offering not just the power to fertilize eggs for new generations, but also serving in meat production, flock protection, and even feather harvesting. Understanding their different stages of development and best uses can help any poultry business grow stronger and more sustainable.</p>
                                 <ul className="px-10 py-5 mx-auto list-disc flex flex-col gap-10">
                                     <li>Cockerels are young male chickens, typically under 6 months old. They are still developing physically and behaviorally, preparing for their adult roles in the flock.</li>
                                     <li>Roosters are mature male chickens, usually over 6 months old. Roosters are fully capable of mating, protecting hens, crowing loudly, and maintaining a flock’s structure.</li>
@@ -461,7 +459,7 @@ export default function Cockerels(){
                                         </div>    
                                     </li>
                                 </ul>
-                            </p>
+                            </div>
                             {/* {ishover2 ? <h3 className="font-extrabold absolute top-5 left-5 border opacity-65 bg-black rounded-lg p-2">Layers</h3> : null} */}
                         </li>
                     </ul>     

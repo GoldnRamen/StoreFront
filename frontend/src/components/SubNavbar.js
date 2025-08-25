@@ -13,11 +13,11 @@ export default function Subnavbar(){
                     <img src={"/chicken.png"} width={20} height={2}/>
                 </div>
                 <ul className="flex justify-between text-sm space-x-3">
-                    <li className="cursor-pointer hover:px-4 hover:border-r hover:border-l hover:text-white"><a href="/">Home</a></li>
-                    <li className="cursor-pointer hover:px-4 hover:border-r hover:border-l hover:text-white"><a href="#about">About</a></li>
-                    <li className="cursor-pointer hover:px-4 hover:border-r hover:border-l hover:text-white"><a href="#contact">Contact Us</a></li>
-                    <li className="cursor-pointer hover:px-4 hover:border-r hover:border-l hover:text-white">Offers</li>
-                    <li className="cursor-pointer hover:px-4 hover:border-r hover:border-l hover:text-white">Promos</li>
+                    <li className="cursor-pointer hover:px-4 hover:text-white"><a href="/">Home</a></li>
+                    <li className="cursor-pointer hover:px-4 hover:text-white"><a href="#about">About</a></li>
+                    <li className="cursor-pointer hover:px-4 hover:text-white"><a href="#contact">Contact Us</a></li>
+                    <li className="cursor-pointer hover:px-4 hover:text-white">Offers</li>
+                    <li className="cursor-pointer hover:px-4 hover:text-white">Promos</li>
                 </ul>
                 <div className="items-center gap-1 flex">
                     <ImCart className="text-orange-950"/>
