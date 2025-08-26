@@ -11,23 +11,23 @@ const meatOrderSchema = new mongoose.Schema({
         type: String,
         enum: ["Rooster", "Hen"],
         trim: true,
-        required: true
     },
     orderQuantity:{
         type: Number,
         required: true,
-        match: [/d[0-9]/, "Please enter a valid email address"]
+        min: [1, "Quantity must be at least 1"]
     },
     birdBreed:{
-        type: [],
+        type: [String],
         enum: ["F_Ecotype", "Sasso", "Noilers", "Kuroilers", "O_Layer", "Broiler"]
     },
     birdCuts:{
         type: String,
-        enum: ["Drumsticks", "Wings", "Breasts", "Thighs", "Half_LVC", "Half_RVC", "Half_THC", "Half_BHC", "Heads", "Feet", "Neck", "Heart", "Gizzard", "Liver"]
+        enum: ["Drumsticks", "Wings", "Breasts", "Thighs", "Half_LVC", "Half_RVC", "Half_THC", "Half_BHC", "Heads", "Feet", "Neck", "Heart", "Gizzard", "Liver",]
     },
     orderTotal:{
         type: Number,
+        default: 0
     }
 
    
