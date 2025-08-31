@@ -23,7 +23,7 @@ const meatOrderSchema = new mongoose.Schema({
     },
     birdCuts:{
         type: String,
-        enum: ["Drumsticks", "Wings", "Breasts", "Thighs", "Half_LVC", "Half_RVC", "Half_THC", "Half_BHC", "Heads", "Feet", "Neck", "Heart", "Gizzard", "Liver",]
+        enum: ["Drumsticks", "Wings", "Breasts", "Thighs", "Half_LVC", "Half_RVC", "Half_THC", "Half_BHC", "Heads", "Feet", "Neck", "Heart", "Gizzard", "Liver", "WholeCarcass", "Bones", "MBM"]
     },
     orderTotal:{
         type: Number,

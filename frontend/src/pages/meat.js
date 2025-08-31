@@ -29,6 +29,52 @@ export default function Meat(){
     const [stillVisible3, setStillVisible3] = useState(false)
     const [isVisible4, setIsVisible4] = useState(false)
     const [stillVisible4, setStillVisible4] = useState(false)
+
+    const [inputValues, setInputValues] = useState({
+        orderType: "",
+        orderQuantity: "",
+        birdSex: "",
+        birdBreed: "",
+        birdCuts: "",
+        orderTotal: ""
+    })
+
+    const [birdBreeds, setBirdBreed] = useState({
+        Fulani_Ecotype: {rooster: 0, hen: 0},
+        Sasso: 0,
+        Noilers: 0,
+        Kuroiler: 0,
+        Broiler: 0,
+        Old_Layer: 0
+    })
+
+    const handleChange = (e) =>{
+        const { name, value } = e.target;
+        setBirdBreed((prev) => ({
+            ...prev,
+            Fulani_Ecotype:{
+                ...prev.Fulani_Ecotype,
+                [name]: parseInt(value) || 0
+            }            
+        }));
+    }
+    const handleQuantity = (breed, type, delta) => {
+        setBirdBreed((prev) =>({
+            ...prev,
+            [breed]:{
+                ...prev[breed],
+                [type] : Math.max(0, prev[breed][type] + delta)
+            }
+        }))
+    }
+    
+    const [valRooster, setValRooster] = useState(0)
+    const [valHen, setValHen] = useState(0)
+    
+    
+    const handleSubmitWhole = () =>{
+        let some = ""
+    }
     
     return(
         <>
@@ -53,7 +99,7 @@ export default function Meat(){
                                     <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-yellow-500 rounded-lg shadow-lg p-4 cursor-pointer">
                                         <div className="relative">
                                             <IoClose className="text-white flex text-xl absolute hover:p-1 hover:bg-black right-0" onClick={() => setFlipped(false)}/>
-                                            <form className="p-4 flex flex-col text-black">
+                                            <form className="p-4 flex flex-col text-black" onSubmit={handleSubmitWhole}>
                                                 <div className="flex gap-2 items-center justify-around mb-3 mx-auto">
                                                     <p className={`bg-amber-500 cursor-pointer p-2 w-fit mx-auto ${isVisible1 ? "animate-none bg-black text-white" : "animate-pulse border rounded-lg"}`} onClick={()=>setIsVisible1(prevState => !prevState)}>{isVisible1 ? "Collapse" : "Place an Order"}</p>
                                                 </div>
@@ -69,20 +115,22 @@ export default function Meat(){
                                                                             <p className="text-center font-bold">
                                                                                 Fulani Ecotype
                                                                             </p>
-                                                                            <div className="flex flex-col">
+                                                                            <div className="flex flex-col">                                                                
                                                                                 <div className="flex items-center p-1 justify-between">
                                                                                     <p className="flex align-text-bottom">Rooster</p>
                                                                                     <div className="flex flex-col justify-evenly items-center mx-auto">
-                                                                                        <div><p>Quantity</p></div>
-                                                                                        <div className="flex items-center space-x-1">
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">+</button>
-                                                                                            <input className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" defaultValue={"0"}/>
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">-</button>
+                                                                                        <div>
+                                                                                            <p>Quantity</p>
+                                                                                            <div className="flex items-center space-x-1">
+                                                                                                <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Fulani_Ecotype", "rooster", +1)}}>+</button>
+                                                                                                <input name={"rooster"} className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" value={birdBreeds.Fulani_Ecotype.rooster} onChange={handleChange}/>
+                                                                                                <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Fulani_Ecotype", "rooster", -1)}}>-</button>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="flex flex-col items-center">
                                                                                         <p>Total</p>
-                                                                                        <p className="border h-5 w-12 bg-white border-gray-500"></p>
+                                                                                        <p className="border h-5 w-12 bg-white flex justify-center border-gray-500">${birdBreeds.Fulani_Ecotype.rooster * 200}</p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <hr className="text-gray-400 my-2"></hr>
@@ -91,14 +139,14 @@ export default function Meat(){
                                                                                     <div className="flex flex-col justify-evenly items-center mx-auto">
                                                                                         <p>Quantity</p>
                                                                                         <div className="flex items-center space-x-1">
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">+</button>
-                                                                                            <input className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" defaultValue={"0"}/>
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">-</button>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Fulani_Ecotype", "hen", +1)}}>+</button>
+                                                                                            <input name={"hen"} className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" value={birdBreeds.Fulani_Ecotype.hen} onChange={handleChange}/>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Fulani_Ecotype", "hen", -1)}}>-</button>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="flex flex-col items-center">
                                                                                         <p>Total</p>
-                                                                                        <p className="border h-5 w-12 bg-white border-gray-500"></p>
+                                                                                        <p className="border h-5 w-12 bg-white flex justify-center border-gray-500">${birdBreeds.Fulani_Ecotype.hen * 150}</p>
                                                                                     </div> 
                                                                                 </div>
                                                                             </div>
@@ -230,7 +278,7 @@ export default function Meat(){
                                                             {!stillVisible1 && (
                                                                 <div className="flex space-x-2 mt-3">
                                                                     <button className="border border-gray-600 p-2 bg-amber-100 hover:bg-amber-300 rounded cursor-pointer">Proceed to Checkout</button>
-                                                                    <button className="border border-gray-600 p-2 bg-amber-100 hover:bg-amber-300 rounded cursor-pointer">Add to Cart</button>
+                                                                    <button className="border border-gray-600 p-2 bg-amber-100 hover:bg-amber-300 rounded cursor-pointer" type="submit">Add to Cart</button>
                                                                 </div>
                                                             )}
                                                             
