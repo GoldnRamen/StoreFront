@@ -19,7 +19,7 @@ const meatOrderSchema = new mongoose.Schema({
     },
     birdBreed:{
         type: [String],
-        enum: ["F_Ecotype", "Sasso", "Noilers", "Kuroilers", "O_Layer", "Broiler"]
+        enum: ["F_Ecotype", "Sasso", "Noilers", "Kuroilers", "O_Layer", "Broilers"]
     },
     birdCuts:{
         type: String,

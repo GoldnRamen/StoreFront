@@ -6,6 +6,7 @@ import Footer from "@/components/Footer"
 import { IoClose } from "react-icons/io5"
 import Navbar from "@/components/Navbar"
 import SmallSidebar from "@/components/SmallSideBar"
+import axios from "axios"
 // import Link from "next/link"
 export default function Meat(){
     const [ishover, setIshover] = useState(false)
@@ -30,22 +31,13 @@ export default function Meat(){
     const [isVisible4, setIsVisible4] = useState(false)
     const [stillVisible4, setStillVisible4] = useState(false)
 
-    const [inputValues, setInputValues] = useState({
-        orderType: "",
-        orderQuantity: "",
-        birdSex: "",
-        birdBreed: "",
-        birdCuts: "",
-        orderTotal: ""
-    })
-
     const [birdBreeds, setBirdBreed] = useState({
         Fulani_Ecotype: {rooster: 0, hen: 0},
-        Sasso: 0,
-        Noilers: 0,
-        Kuroiler: 0,
-        Broiler: 0,
-        Old_Layer: 0
+        Sasso: {rooster: 0, hen: 0},
+        Noilers: {rooster: 0, hen: 0},
+        Kuroilers: {rooster: 0, hen: 0},
+        Broiler: {rooster: 0, hen: 0},
+        Old_Layer: {rooster: 0, hen: 0},
     })
 
     const handleChange = (e) =>{
@@ -55,7 +47,19 @@ export default function Meat(){
             Fulani_Ecotype:{
                 ...prev.Fulani_Ecotype,
                 [name]: parseInt(value) || 0
-            }            
+            } ,
+            Sasso:{
+                ...prev.Sasso,
+                [name]: parseInt(value) || 0
+            }, 
+            Noilers:{
+                ...prev.Noilers,
+                [name]: parseInt(value) || 0
+            },
+            Kuroilers:{
+                ...prev.Kuroilers,
+                [name]: parseInt(value) || 0
+            }
         }));
     }
     const handleQuantity = (breed, type, delta) => {
@@ -67,13 +71,35 @@ export default function Meat(){
             }
         }))
     }
+
+    let WholeTotal = ((birdBreeds.Fulani_Ecotype.rooster * 200) + (birdBreeds.Fulani_Ecotype.hen * 150) + 
+                    (birdBreeds.Sasso.rooster * 200) + (birdBreeds.Sasso.hen * 200) + 
+                    (birdBreeds.Noilers.rooster * 200) + (birdBreeds.Noilers.hen * 200) + 
+                    (birdBreeds.Kuroilers.rooster * 200) + (birdBreeds.Kuroilers.hen * 300) || 0)
+    
+    let WholeBreeds = birdBreeds.map((breeds)=>(
+        breeds.rooster > 0
+    ))
     
     const [valRooster, setValRooster] = useState(0)
     const [valHen, setValHen] = useState(0)
+        
     
-    
-    const handleSubmitWhole = () =>{
-        let some = ""
+    const handleSubmitWhole = async() =>{
+        const [inputValues, setInputValues] = useState({
+            orderType: "Whole",
+            orderQuantity: "",
+            birdSex: "",
+            birdBreed: "",
+            birdCuts: "",
+            orderTotal: WholeTotal
+        })
+        try {
+            const resp = await axios.post("http://localhost:5000/api/orders/customer/meatOrder", inputValues)
+
+        } catch (error) {
+            
+        }
     }
     
     return(
@@ -163,14 +189,14 @@ export default function Meat(){
                                                                                     <div className="flex flex-col justify-evenly items-center mx-auto">
                                                                                         <div><p>Quantity</p></div>
                                                                                         <div className="flex items-center space-x-1">
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">+</button>
-                                                                                            <input className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" defaultValue={"0"}/>
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">-</button>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Sasso", "rooster", +1)}}>+</button>
+                                                                                            <input name="rooster" className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" value={birdBreeds.Sasso.rooster} onChange={handleChange}/>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Sasso", "rooster", -1)}}>-</button>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="flex flex-col items-center">
                                                                                         <p>Total</p>
-                                                                                        <p className="border h-5 w-12 bg-white border-gray-500"></p>
+                                                                                        <p className="border h-5 w-12 bg-white border-gray-500">${birdBreeds.Sasso.rooster * 200}</p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <hr className="text-gray-400 my-2"></hr>
@@ -179,14 +205,14 @@ export default function Meat(){
                                                                                     <div className="flex flex-col justify-evenly items-center mx-auto">
                                                                                         <p>Quantity</p>
                                                                                         <div className="flex items-center space-x-1">
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">+</button>
-                                                                                            <input className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" defaultValue={"0"}/>
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">-</button>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Sasso", "hen", +1)}}>+</button>
+                                                                                            <input name="hen" className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" value={birdBreeds.Sasso.hen} onChange={handleChange}/>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Sasso", "hen", -1)}}>-</button>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="flex flex-col items-center">
                                                                                         <p>Total</p>
-                                                                                        <p className="border h-5 w-12 bg-white border-gray-500"></p>
+                                                                                        <p className="border h-5 w-12 bg-white border-gray-500">${birdBreeds.Sasso.hen * 200}</p>
                                                                                     </div> 
                                                                                 </div>
                                                                             </div>
@@ -203,14 +229,14 @@ export default function Meat(){
                                                                                     <div className="flex flex-col justify-evenly items-center mx-auto">
                                                                                         <div><p>Quantity</p></div>
                                                                                         <div className="flex items-center space-x-1">
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">+</button>
-                                                                                            <input className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" defaultValue={"0"}/>
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">-</button>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Noilers", "rooster", +1)}}>+</button>
+                                                                                            <input name="rooster" className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" value={birdBreeds.Noilers.rooster} onChange={handleChange}/>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Noilers", "rooster", -1)}}>-</button>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="flex flex-col items-center">
                                                                                         <p>Total</p>
-                                                                                        <p className="border h-5 w-12 bg-white border-gray-500"></p>
+                                                                                        <p className="border h-5 w-12 bg-white border-gray-500">${birdBreeds.Noilers.rooster * 200}</p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <hr className="text-gray-400 my-2"></hr>
@@ -219,14 +245,14 @@ export default function Meat(){
                                                                                     <div className="flex flex-col justify-evenly items-center mx-auto">
                                                                                         <p>Quantity</p>
                                                                                         <div className="flex items-center space-x-1">
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">+</button>
-                                                                                            <input className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" defaultValue={"0"}/>
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">-</button>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Noilers", "hen", +1)}}>+</button>
+                                                                                            <input name="hen" className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" value={birdBreeds.Noilers.hen} onChange={handleChange}/>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Noilers", "hen", -1)}}>-</button>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="flex flex-col items-center">
                                                                                         <p>Total</p>
-                                                                                        <p className="border h-5 w-12 bg-white border-gray-500"></p>
+                                                                                        <p className="border h-5 w-12 bg-white border-gray-500">${birdBreeds.Noilers.hen * 300}</p>
                                                                                     </div> 
                                                                                 </div>
                                                                             </div>
@@ -243,14 +269,14 @@ export default function Meat(){
                                                                                     <div className="flex flex-col justify-evenly items-center mx-auto">
                                                                                         <div><p>Quantity</p></div>
                                                                                         <div className="flex items-center space-x-1">
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">+</button>
-                                                                                            <input className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" defaultValue={"0"}/>
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">-</button>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Kuroilers", "rooster", +1)}}>+</button>
+                                                                                            <input name="rooster" className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" value={birdBreeds.Kuroilers.rooster} onChange={handleChange}/>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Kuroilers", "rooster", -1)}}>-</button>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="flex flex-col items-center">
                                                                                         <p>Total</p>
-                                                                                        <p className="border h-5 w-12 bg-white border-gray-500"></p>
+                                                                                        <p className="border h-5 w-12 bg-white border-gray-500">${birdBreeds.Kuroilers.rooster * 250}</p>
                                                                                     </div>
                                                                                 </div>
                                                                                 <hr className="text-gray-400 my-2"></hr>
@@ -259,14 +285,14 @@ export default function Meat(){
                                                                                     <div className="flex flex-col justify-evenly items-center mx-auto">
                                                                                         <p>Quantity</p>
                                                                                         <div className="flex items-center space-x-1">
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">+</button>
-                                                                                            <input className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" defaultValue={"0"}/>
-                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer">-</button>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Kuroilers", "hen", +1)}}>+</button>
+                                                                                            <input name="hen" className="border rounded items-center bg-white w-[50px] border-gray-500 text-center" value={birdBreeds.Kuroilers.hen} onChange={handleChange}/>
+                                                                                            <button className="border border-gray-600 px-1 bg-amber-100 rounded cursor-pointer" onClick={(e)=>{e.preventDefault(); handleQuantity("Kuroilers", "hen", -1)}}>-</button>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="flex flex-col items-center">
                                                                                         <p>Total</p>
-                                                                                        <p className="border h-5 w-12 bg-white border-gray-500"></p>
+                                                                                        <p className="border h-5 w-12 bg-white border-gray-500">${birdBreeds.Kuroilers.hen * 300}</p>
                                                                                     </div> 
                                                                                 </div>
                                                                             </div>
